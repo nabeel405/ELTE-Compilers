@@ -1,0 +1,8 @@
+program inc
+    integer x;
+    integer y;
+begin
+    read(x);
+    x := x+1;
+    write(x);
+end

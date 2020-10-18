@@ -1,0 +1,5 @@
+program inc
+begin
+    15:14;
+    # 25:14; this will fail
+end

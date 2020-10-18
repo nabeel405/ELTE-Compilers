@@ -1,0 +1,12 @@
+program ures1234
+    integer try61;
+begin
+    skip;
+    /* its a *
+    comment */
+    skip;
+
+    /*
+    its a second comment
+    */
+end

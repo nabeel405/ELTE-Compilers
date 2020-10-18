@@ -1,0 +1,7 @@
+program ures
+    integer x;
+begin
+    for i := 5 to 1 do
+        x := 2;
+    done
+end

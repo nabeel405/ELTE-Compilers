@@ -1,0 +1,7 @@
+program ures
+    integer g;
+begin
+    10
+    10.5
+    skip;
+end
