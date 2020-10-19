@@ -5,16 +5,12 @@
 %token T_PROGRAM
 %token T_BEGIN
 %token T_END
-%token T_INTEGER 
+%token T_INTEGER
 %token T_BOOLEAN
 %token T_SKIP
 %token T_IF
-%token T_THEN
 %token T_ELSE
-%token T_ENDIF
 %token T_WHILE
-%token T_DO
-%token T_DONE
 %token T_READ
 %token T_WRITE
 %token T_SEMICOLON
@@ -134,21 +130,21 @@ write:
 ;
 
 branch:
-    T_IF expression T_THEN statements T_ENDIF
+    T_IF expression T_BEGIN statements T_END
     {
-        std::cout << "branch -> T_IF expression T_THEN statements T_ENDIF" << std::endl;
+        std::cout << "branch -> T_IF expression T_BEGIN statements T_END" << std::endl;
     }
 |
-    T_IF expression T_THEN statements T_ELSE statements T_ENDIF
+    T_IF expression T_BEGIN statements T_END T_ELSE T_BEGIN statements T_END
     {
-        std::cout << "branch -> T_IF expression T_THEN statements T_ELSE statements T_ENDIF" << std::endl;
+        std::cout << "branch -> T_IF expression T_BEGIN statements T_ELSE statements T_END" << std::endl;
     }
 ;
 
 loop:
-    T_WHILE expression T_DO statements T_DONE
+    T_WHILE expression T_BEGIN statements T_END
     {
-        std::cout << "loop -> T_WHILE expression T_DO statements T_DONE" << std::endl;
+        std::cout << "loop -> T_WHILE expression T_BEGIN statements T_END" << std::endl;
     }
 ;
 
