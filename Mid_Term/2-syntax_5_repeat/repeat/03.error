@@ -1,0 +1,7 @@
+program prog1
+  integer id1;
+begin
+  id1 := 10;
+  repeat until done;
+  write(id1);
+end
