@@ -26,7 +26,7 @@
 %token T_FALSE
 %token T_ID
 %token T_REPEAT
-%token T_UNTIL 
+%token T_UNTIL
 
 %left T_OR T_AND
 %left T_EQ
@@ -112,8 +112,19 @@ statement:
     {
         std::cout << "statement -> loop" << std::endl;
     }
-;
+|
+    repeat
+    {
+    std::cout<<"statment->repeat"<<std::endl;
+    }
 
+;
+repeat:
+    T_REPEAT statements  T_UNTIL conditionals T_DONE T_SEMICOLON
+    {
+    std::cout<<"repeat->T_REPEAT expression T_SEMICOLON T_UNTIL expression T_DONE T_SEMICOLON"<<std::endl;
+    }
+;
 assignment:
     T_ID T_ASSIGN expression T_SEMICOLON
     {
@@ -136,26 +147,21 @@ write:
 ;
 
 branch:
-    T_IF expression T_BEGIN statements T_END
+    T_IF expression T_THEN statements T_ENDIF
     {
         std::cout << "branch -> T_IF expression T_THEN statements T_ENDIF" << std::endl;
     }
 |
-    T_IF expression T_BEGIN statements T_END T_ELSE T_BEGIN statements T_END
+    T_IF expression T_THEN statements T_ELSE statements T_ENDIF
     {
-        std::cout << "branch -> T_IF expression T_BEGIN statements T_END  T_ELSE T_BEGIN statements T_END" << std::endl;
+        std::cout << "branch -> T_IF expression T_THEN statements T_ELSE statements T_ENDIF" << std::endl;
     }
 ;
 
 loop:
-    T_WHILE expression T_BEGIN statements T_END
+    T_WHILE expression T_DO statements T_DONE
     {
         std::cout << "loop -> T_WHILE expression T_DO statements T_DONE" << std::endl;
-    }
-|
-    T_REPEAT statements T_UNTIL expression T_DONE T_SEMICOLON
-    {
-    std::cout<<"loop -> T_REPEAT statementes T_UNTIL expression T_DONE T_SEMICOLON"<<std::endl;
     }
 ;
 
@@ -205,6 +211,17 @@ expression:
         std::cout << "expression -> expression T_MOD expression" << std::endl;
     }
 |
+    conditionals
+    {
+    std::cout<<"expression->conditionals expression"<<std::endl;
+    }
+|
+    T_OPEN expression T_CLOSE
+    {
+        std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
+    }
+;
+conditionals:
     expression T_LESS expression
     {
         std::cout << "expression -> expression T_LESS expression" << std::endl;
@@ -233,10 +250,5 @@ expression:
     T_NOT expression
     {
         std::cout << "expression -> T_NOT expression" << std::endl;
-    }
-|
-    T_OPEN expression T_CLOSE
-    {
-        std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
     }
 ;

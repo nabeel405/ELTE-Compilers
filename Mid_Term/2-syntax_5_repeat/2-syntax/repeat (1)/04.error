@@ -1,4 +1,4 @@
-program prog1
+program _prog1
   integer id1;
 begin
   id1 := 10;
@@ -6,7 +6,7 @@ begin
     id1 := id1 - 1;
     write(id1);
   until
-    skip
-  done;
+    id1 = 0
+  done
   write(id1);
 end

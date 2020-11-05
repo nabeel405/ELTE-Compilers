@@ -27,8 +27,6 @@ do          return Parser::T_DO;
 done        return Parser::T_DONE;
 read        return Parser::T_READ;
 write       return Parser::T_WRITE;
-repeat		return Parser::T_REPEAT;
-until		return Parser::T_UNTIL;
 ";"         return Parser::T_SEMICOLON;
 ":="        return Parser::T_ASSIGN;
 "="         return Parser::T_EQ;
@@ -44,6 +42,8 @@ div         return Parser::T_DIV;
 mod         return Parser::T_MOD;
 "("         return Parser::T_OPEN;
 ")"         return Parser::T_CLOSE;
+repeat		return Parser::T_REPEAT;
+until		return Parser::T_UNTIL;
 
 {DIGIT}+	return Parser::T_NUM;
 true        return Parser::T_TRUE;
@@ -51,7 +51,7 @@ false       return Parser::T_FALSE;
 
 "#".*\n    // nothing to do
 
-{LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
+{LETTER}({LETTER}|{DIGIT}|_)*|_{LETTER}({LETTER}|{DIGIT}|_)*    return Parser::T_ID;
 
 {WS}+   // nothing to do
 
