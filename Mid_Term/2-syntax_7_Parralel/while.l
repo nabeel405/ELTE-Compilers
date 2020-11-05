@@ -42,11 +42,9 @@ div         return Parser::T_DIV;
 mod         return Parser::T_MOD;
 "("         return Parser::T_OPEN;
 ")"         return Parser::T_CLOSE;
-"||"		return Parser::T_PARALL;
+"|"			return Parser::T_LINE;
 "["			return Parser::T_SOPEN;
 "]"			return Parser::T_SCLOSE;
-
-
 {DIGIT}+	return Parser::T_NUM;
 true        return Parser::T_TRUE;
 false       return Parser::T_FALSE;

@@ -25,11 +25,9 @@
 %token T_TRUE
 %token T_FALSE
 %token T_ID
-%token T_PARALL
+%token T_LINE
 %token T_SOPEN
 %token T_SCLOSE
-
-
 %left T_OR T_AND
 %left T_EQ
 %left T_LESS T_GR
@@ -92,20 +90,35 @@ statement:
 |
     assignment T_SEMICOLON
     {
-        std::cout << "statement -> assignment" << std::endl;
+        std::cout << "statement -> assignment T_SEMICOLON" << std::endl;
+    }
+|
+    assignment 
+    {
+std::cout<<"statment-> assignment "<<std::endl;
     }
 |
     read T_SEMICOLON
     {
-        std::cout << "statement -> read T_SEMICOLLON" << std::endl;
+        std::cout << "statement -> read" << std::endl;
+    }
+|
+    read 
+    {
+std::cout<<"statment-> read "<<std::endl;
     }
 |
     write T_SEMICOLON
     {
-        std::cout << "statement -> write T_SEMICOLLON" << std::endl;
+        std::cout << "statement -> write" << std::endl;
     }
 |
-    branch
+    write 
+    {
+        std::cout<<"statment-> read "<<std::endl;
+    }
+|
+    branch 
     {
         std::cout << "statement -> branch" << std::endl;
     }
@@ -114,52 +127,42 @@ statement:
     {
         std::cout << "statement -> loop" << std::endl;
     }
+| 
+    parallel T_SEMICOLON
+    {
+    std::cout<<"statment-> parallel"<<std::endl;
+    }
+
 |
-	parallel
-	{
-	std::cout<<"statement->parallel "<<std::endl;
-	}
-|
-	read
-	{
-	std::cout<<"statment->read"<<std::endl;
-	}
-|
-	write
-	{
-	std::cout<<"statement->write"<<std::endl;
-	}
-|
-	assignment
-	{
-	std::cout<<"statment->assignment"<<std::endl;
-	}
+    parallel 
+    {
+    std::cout<<"stamtent -> parallel"<<std::endl;
+    }
 ;
 
 parallel:
-	T_SOPEN statement T_PARALL statement T_SCLOSE T_SEMICOLON
-	{
-	std::cout<<"statment ->  parallel  T_SOPEN statement T_PARALL T_SCLOSE T_SEMICOLON"<<std::endl;
-	}
-;
+   T_SOPEN statement T_LINE T_LINE statements T_SCLOSE
+    {
+    std::cout<<"Pstatments-> statememts T_LINE T_LINE statements"<<std::endl;
+    };
 assignment:
     T_ID T_ASSIGN expression 
     {
-        std::cout << "assignment -> T_ID T_ASSIGN expression " << std::endl;
+        std::cout << "assignment -> T_ID T_ASSIGN expression T_SEMICOLON" << std::endl;
     }
 ;
 
 read:
     T_READ T_OPEN T_ID T_CLOSE 
     {
-        std::cout << "read -> T_READ T_OPEN T_ID T_CLOSE " << std::endl;
+        std::cout << "read -> T_READ T_OPEN T_ID T_CLOSE T_SEMICOLON" << std::endl;
     }
 ;
 
 write:
     T_WRITE T_OPEN expression T_CLOSE 
     {
-        std::cout << "write -> T_WRITE T_OPEN expression T_CLOSE " << std::endl;
+        std::cout << "write -> T_WRITE T_OPEN expression T_CLOSE T_SEMICOLON" << std::endl;
     }
 ;
 
@@ -261,6 +264,5 @@ expression:
     T_OPEN expression T_CLOSE
     {
         std::cout << "expression -> T_OPEN expression T_CLOSE" << std::endl;
-    }	
-
+    }
 ;
